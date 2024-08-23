@@ -1,0 +1,337 @@
+[
+			{
+				
+				"localities": [
+					{
+						"name": "Sarita Vihar",
+						"locality_id": "ZWL005764",
+						"latitude": 28.531759,
+						"longitude": 77.293973,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Faridabad Sector 41-50",
+						"locality_id": "ZWL008752",
+						"latitude": 28.460895,
+						"longitude": 77.304764,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "New Friends Colony",
+						"locality_id": "ZWL005996",
+						"latitude": 28.565268,
+						"longitude": 77.274971,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 26 ( Noida )",
+						"locality_id": "ZWL005243",
+						"latitude": 28.574404,
+						"longitude": 77.334178,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "New Industrial Town",
+						"locality_id": "ZWL009032",
+						"latitude": 28.375702,
+						"longitude": 77.299442,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Tilak Nagar",
+						"locality_id": "ZWL005428",
+						"latitude": 28.641372,
+						"longitude": 77.094689,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 10 , Gurgaon",
+						"locality_id": "ZWL001073",
+						"latitude": 28.436077,
+						"longitude": 76.996757,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Ashok Vihar , Delhi",
+						"locality_id": "ZWL001319",
+						"latitude": 28.684453,
+						"longitude": 77.174418,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Kalkaji",
+						"locality_id": "ZWL004800",
+						"latitude": 28.529029,
+						"longitude": 77.258939,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 53",
+						"locality_id": "ZWL003118",
+						"latitude": 28.442743,
+						"longitude": 77.104379,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 49",
+						"locality_id": "ZWL002091",
+						"latitude": 28.408012,
+						"longitude": 77.050064,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Vasundhara",
+						"locality_id": "ZWL002662",
+						"latitude": 28.665225,
+						"longitude": 77.366782,
+						"device_type": "2- Rain gauge system"
+					},
+					{
+						"name": "Rajinder Nagar",
+						"locality_id": "ZWL001404",
+						"latitude": 28.640732,
+						"longitude": 77.1829,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Safdarjung Enclave",
+						"locality_id": "ZWL008963",
+						"latitude": 28.562608,
+						"longitude": 77.191457,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Connaught Place",
+						"locality_id": "ZWL006538",
+						"latitude": 28.63063,
+						"longitude": 77.22064,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 66",
+						"locality_id": "ZWL003075",
+						"latitude": 28.380856,
+						"longitude": 77.062751,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 57",
+						"locality_id": "ZWL003721",
+						"latitude": 28.4221,
+						"longitude": 77.08274,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Moti Bagh , Delhi",
+						"locality_id": "ZWL006396",
+						"latitude": 28.575774,
+						"longitude": 77.180697,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Patel Nagar , Delhi",
+						"locality_id": "ZWL004535",
+						"latitude": 28.652848,
+						"longitude": 77.167909,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Greater Noida",
+						"locality_id": "ZWL008554",
+						"latitude": 28.456171,
+						"longitude": 77.521577,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Karkardooma , Delhi",
+						"locality_id": "ZWL004533",
+						"latitude": 28.656829,
+						"longitude": 77.310553,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Tigaon",
+						"locality_id": "ZWL002179",
+						"latitude": 28.41712,
+						"longitude": 77.412569,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Sector 50 ( Noida )",
+						"locality_id": "ZWL007487",
+						"latitude": 28.569103,
+						"longitude": 77.364876,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Vasant Kunj , Delhi",
+						"locality_id": "ZWL007120",
+						"latitude": 28.524633,
+						"longitude": 77.151206,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Dwarka , Delhi",
+						"locality_id": "ZWL007486",
+						"latitude": 28.594467,
+						"longitude": 77.0477471,
+						"device_type": "-Automated weather system"
+					},
+					{
+						"name": "Sector 15",
+						"locality_id": "ZWL006287",
+						"latitude": 28.457927,
+						"longitude": 77.034816,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Mayur Vihar Phase III",
+						"locality_id": "ZWL002146",
+						"latitude": 28.606,
+						"longitude": 77.323675,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Crossing Republik",
+						"locality_id": "ZWL008405",
+						"latitude": 28.635043,
+						"longitude": 77.419056,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Sector 28",
+						"locality_id": "ZWL004455",
+						"latitude": 28.473457,
+						"longitude": 77.087532,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Palam Vihar , Gurgaon",
+						"locality_id": "ZWL005087",
+						"latitude": 28.508782,
+						"longitude": 77.033506,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Sector 63 ( Noida )",
+						"locality_id": "ZWL009648",
+						"latitude": 28.621672,
+						"longitude": 77.386474,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Raj Nagar , Ghaziabad",
+						"locality_id": "ZWL008317",
+						"latitude": 28.689174,
+						"longitude": 77.428976,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Sector 128",
+						"locality_id": "ZWL005878",
+						"latitude": 28.526706,
+						"longitude": 77.354868,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Sector 56 , Gurgaon",
+						"locality_id": "ZWL003241",
+						"latitude": 28.418235,
+						"longitude": 77.10186,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Indirapuram",
+						"locality_id": "ZWL007224",
+						"latitude": 28.644059,
+						"longitude": 77.373883,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Malviya Nagar",
+						"locality_id": "ZWL009834",
+						"latitude": 28.536048,
+						"longitude": 77.213453,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Sector 43 , Gurgaon",
+						"locality_id": "ZWL007284",
+						"latitude": 28.454416,
+						"longitude": 77.08882,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Sector 120 ( Noida )",
+						"locality_id": "ZWL006738",
+						"latitude": 28.586854,
+						"longitude": 77.390832,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Saket",
+						"locality_id": "ZWL007329",
+						"latitude": 28.523171,
+						"longitude": 77.207543,
+						"device_type": "1 -Automated weather system"
+					},
+					{
+						"name": "Sector 18 ( Noida )",
+						"locality_id": "ZWL001752",
+						"latitude": 28.568937,
+						"longitude": 77.324414,
+						"device_type": "2 - Rain gauge system"
+					},
+					{
+						"name": "Naraina",
+						"locality_id": "ZWL007594",
+						"latitude": 28.627479,
+						"longitude": 77.142115,
+						"device_type": "2 - Rain gauge system"
+					},
+					{
+						"name": "Patparganj",
+						"locality_id": "ZWL006116",
+						"latitude": 28.632961,
+						"longitude": 77.308344,
+						"device_type": "1 Automated weather system"
+					},
+					{
+						"name": "Ghitorni",
+						"locality_id": "ZWL009925",
+						"latitude": 28.486412,
+						"longitude": 77.125366,
+						"device_type": "1- Automated weather system"
+					},
+					{
+						"name": "Faridabad Sector 1-11",
+						"locality_id": "ZWL009335",
+						"latitude": 28.365131,
+						"longitude": 77.326157,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Sector 24",
+						"locality_id": "ZWL009638",
+						"latitude": 28.497419,
+						"longitude": 77.09098,
+						"device_type": "1 - Automated weather system"
+					},
+					{
+						"name": "Rajouri Garden",
+						"locality_id": "ZWL005670",
+						"latitude": 28.646438,
+						"longitude": 77.122357,
+						"device_type": "2- Rain gauge system"
+					},
+					{
+						"name": "Vishnu Garden",
+						"locality_id": "ZWL003757",
+						"latitude": 28.646933,
+						"longitude": 77.095064,
+						"device_type": "1 Automated weather system"
+					}
+				
+                ]
+			}
+		]

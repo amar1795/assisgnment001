@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head'
 import Avatar from '../components/Avatar';
@@ -8,23 +8,63 @@ import Footer from '../components/Footer';
 import { MicrophoneIcon, ViewGridIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
+import { fetchAllWeatherStations } from '@/actions/fetchWeather';
+import { fetchWeatherStationsByLocality } from '@/actions/getWeatherByLocalityName';
+import debounce from 'lodash.debounce';
 
 export default function HomePage() {
+
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+const [showDropdown, setShowDropdown] = useState(false);
+const dropdownRef = useRef(null); // Ref for dropdown container
+
+  console.log("This is the fetched Data",data);
+
+  useEffect(() => {
+    if (searchTerm) {
+      // Define a debounced function
+      const debouncedFetch = debounce(async () => {
+        const data = await fetchWeatherStationsByLocality({
+          localityName: searchTerm,
+          page: 1,
+          limit: 25,
+          sortOrder: 'desc'
+        });
+        setSuggestions(data); // Use data for suggestions
+        setShowDropdown(true); // Show dropdown when there are suggestions
+      }, 300); // 300ms debounce delay
+  
+      debouncedFetch();
+  
+      // Cleanup function to cancel debounce if component unmounts
+      return () => {
+        debouncedFetch.cancel();
+      };
+    } else {
+      setShowDropdown(false); // Hide dropdown when searchTerm is empty
+    }
+  }, [searchTerm]);
+  
 
   const searchInputRef = useRef(null);
   const router = useRouter();
 
-  const search = (event) => {
-    event.preventDefault();
-    const term = searchInputRef.current.value;
+const search = (event) => {
+  event.preventDefault();
+  const term = searchInputRef.current.value;
 
-    if (!term) {
-      return;
-    }
-
-    router.push(`/search?term=${term}`);
-
+  if (!term) {
+    return;
   }
+
+  alert("You have searched for " + term);
+  setSearchTerm(term);
+  // router.push(`/search?term=${term}`);
+  setShowDropdown(false); // Hide dropdown when search is initiated
+}
+
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -71,7 +111,21 @@ export default function HomePage() {
           />
           <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
             <SearchIcon className="h-5 mr-3 text-gray-500"/>
-            <input ref={searchInputRef} type="text" className="flex-grow  focus:outline-none"/>
+            <input ref={searchInputRef} type="text"     onChange={(e) => setSearchTerm(e.target.value)}
+ className="flex-grow  focus:outline-none"/>
+
+            {showDropdown && suggestions.length > 0 && (
+  <div className="absolute bg-white border border-gray-300 rounded-md shadow-lg mt-2 w-full max-w-md">
+    <ul>
+      {suggestions.map((suggestion, index) => (
+        <li key={index} className="p-2 cursor-pointer hover:bg-gray-100">
+          {suggestion.localityName} {/* Adjust based on your suggestion data */}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
            
            <div className=' cursor-pointer'>
            <img src="../../mic.png" className="h-8" />
