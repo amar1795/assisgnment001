@@ -24,10 +24,7 @@ const page = () => {
     {/*  Header */}
 
     <Header />
-    
-    
-    {/* Search Results */}
-    {/* <SearchResults results={results} /> */}
+
 
   </div>
   )

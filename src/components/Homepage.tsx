@@ -156,7 +156,8 @@ export default function HomePage() {
         {/* Buttons */}
         <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:space-y-0 sm:flex-row sm:space-x-4">
           <button
-            onClick={(event) => search(event)}
+            // onClick={(event) => search(event)}
+            onClick={(event) => event.preventDefault()}
             className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200  below-430:text-[0.8rem]
              below-380:text-[0.6rem] "
           >
