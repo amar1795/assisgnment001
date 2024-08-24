@@ -17,7 +17,7 @@ const SearchInput = () => {
   const [cityName, setCityName] = useState("");
   const dropdownRef = useRef(null); // Ref for dropdown container
 
-  console.log("this is Data", suggestions);
+  // console.log("this is Data", suggestions);
 
   // Initialize the store with the product information
   const store = useAppStore();
@@ -34,7 +34,7 @@ const SearchInput = () => {
   );
   const dispatch = useAppDispatch();
 
-  console.log("this is the searchedLocalityID", searchedLocalityID);
+  // console.log("this is the searchedLocalityID", searchedLocalityID);
 
   useEffect(() => {
     // Get stored values from localStorage
@@ -144,7 +144,7 @@ const SearchInput = () => {
         type="text"
         value={SearchedValue} // Bind the input value to the Redux state
         onChange={handleInputChange} // Handle changes
-        className="flex-grow  focus:outline-none below-430:text-[0.8rem]"
+        className="flex-grow  focus:outline-none below-430:text-[0.8rem] below-380:text-[0.6rem]"
       />
       {SearchedValue && (
         <div
@@ -163,10 +163,10 @@ const SearchInput = () => {
       {showDropdown && (
         <div
           ref={dropdownRef} // Add ref to the dropdown container
-          className="absolute z-50 bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5   "
+          className="absolute z-50 bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5 below-1150:w-[30rem] below-430:w-[20rem]  below-430:text-[0.8rem]  below-380:w-[15rem] below-380:text-[0.6rem]"
         >
           {suggestions.length > 0 ? (
-            (console.log("Suggestions", suggestions),
+            
             (
               <ul>
                 {suggestions.map((suggestion) => (
@@ -184,7 +184,7 @@ const SearchInput = () => {
                   </li>
                 ))}
               </ul>
-            ))
+            )
           ) : (
             <div className="p-2 text-gray-500">No results found</div>
           )}
@@ -192,10 +192,10 @@ const SearchInput = () => {
       )}
 
       <div className=" cursor-pointer">
-        <img src="../../mic.png" className="h-8 below-430:h-5" />
+        <img src="../../mic.png" className="h-8 below-430:h-5  below-380:h-4" />
       </div>
       <div className=" cursor-pointer">
-        <img src="../../lens.png" className="h-8 below-430:h-5" />
+        <img src="../../lens.png" className="h-8 below-430:h-5  below-380:h-4" />
       </div>
     </div>
   );

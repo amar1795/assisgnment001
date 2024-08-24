@@ -54,8 +54,8 @@ function Header() {
   const [backgroundVideo, setBackgroundVideo] = useState("");
   const [dateTime, setDateTime] = useState(getFormattedDateTime());
 const[weatherConditionPicSource,setWeatherConditionPicSource]=useState(""); 
-  console.log("this is the localityData", localityData);
-  console.log("this is the background video", backgroundVideo);
+  // console.log("this is the localityData", localityData);
+  // console.log("this is the background video", backgroundVideo);
 
   const search = (event) => {
     event.preventDefault();
@@ -251,7 +251,7 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
 
        <div className=" px-[3rem] below-430:px-0 ">
       <div className=" top below-430:px-5">
-      <h1 className=" pt-[2rem] text-[2rem] below-430:text-[1.2rem]">Today's Weather Forecast</h1>
+      <h1 className=" pt-[2rem] text-[3rem] font-bold below-430:text-[1.2rem]">Today's Weather Forecast</h1>
         <div className=" flex items-center below-430:my-8">
         <h1 className=" text-[5rem]  below-430:text-[3rem]">{weatherCondtion} </h1>
         <img src={weatherConditionPicSource} alt="" className=" h-[15rem] ml-9  below-430:h-[5rem]" />

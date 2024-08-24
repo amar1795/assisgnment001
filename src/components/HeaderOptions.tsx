@@ -13,8 +13,8 @@ function HeaderOptions() {
         <HeaderOption Icon={DotsVerticalIcon} title="More" />
       </div>
       <div className="flex space-x-4 ">
-        <p className="link"> Settings </p>
-        <p className="link"> Tools </p>
+        <p className="link below-380:text-[0.6rem]"> Settings </p>
+        <p className="link below-380:text-[0.6rem]"> Tools </p>
       </div>
     </div>
   )

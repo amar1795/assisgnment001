@@ -23,7 +23,7 @@ export default function HomePage() {
   const [cityName, setCityName] = useState("");
   const dropdownRef = useRef(null); // Ref for dropdown container
 
-  console.log("This is the fetched Data", data);
+  // console.log("This is the fetched Data", data);
 
 
 
@@ -111,17 +111,17 @@ export default function HomePage() {
       <header className="flex w-full p-5 justify-between text-sm text-gray-700">
         {/* Left */}
         <div className="flex space-x-4 items-center">
-          <p className="link ">About</p>
-          <p className="link ">Store</p>
+          <p className="link  below-380:text-[0.6rem] below-430:text-[0.8rem] ">About</p>
+          <p className="link   below-380:text-[0.6rem] below-430:text-[0.8rem] ">Store</p>
         </div>
 
         {/* Right */}
-        <div className="flex space-x-4 items-center">
-          <p className="link hover:underline cursor-pointer">Gmail</p>
-          <p className="link hover:underline cursor-pointer">Images</p>
+        <div className="flex space-x-4 items-center below-380:ml-4">
+          <p className="link hover:underline cursor-pointer below-380:text-[0.6rem] below-430:text-[0.8rem]">Gmail</p>
+          <p className="link hover:underline cursor-pointer below-380:text-[0.6rem] below-430:text-[0.8rem]">Images</p>
 
           {/* Icon */}
-          <div className="cursor-pointer rounded-full hover:bg-gray-100 h-10 w-10 flex self-center items-center justify-center ">
+          <div className=" below-380:hidden cursor-pointer rounded-full hover:bg-gray-100 h-10 w-10 flex self-center items-center justify-center ">
             <img
               src="https://storage.googleapis.com/support-kms-prod/cGGjo9CcfMkEzQALYQ9oADD7XkRTe98JzRCD"
               alt=""
@@ -148,49 +148,7 @@ export default function HomePage() {
           width={300}
         />
 
-        {/* <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
-          <SearchIcon className="h-5 mr-3 text-gray-500" />
-          <input
-            ref={searchInputRef}
-            type="text"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-grow  focus:outline-none"
-          />
-
-          {showDropdown && (
-            <div
-              ref={dropdownRef} // Add ref to the dropdown container
-              className="absolute bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5   "
-            >
-              {suggestions.length > 0 ? (
-                (console.log("Suggestions", suggestions),
-                (
-                  <ul>
-                    {suggestions.map((suggestion) => (
-                      <li
-                        key={suggestion.id}
-                        className="p-2 cursor-pointer hover:bg-gray-100"
-                        onClick={() => handleClick(suggestion.localityName)}
-                      >
-                        {suggestion.localityName}
-                      </li>
-                    ))}
-                  </ul>
-                ))
-              ) : (
-                <div className="p-2 text-gray-500">No results found</div>
-              )}
-            </div>
-          )}
-
-          <div className=" cursor-pointer">
-            <img src="../../mic.png" className="h-8" />
-          </div>
-          <div className=" cursor-pointer">
-            <img src="../../lens.png" className="h-8" />
-          </div>
-        </div> */}
-
+      
         <div className=" w-full flex items-center justify-center    ">
         <SearchInput/>
         </div>
@@ -199,27 +157,28 @@ export default function HomePage() {
         <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:space-y-0 sm:flex-row sm:space-x-4">
           <button
             onClick={(event) => search(event)}
-            className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200 "
+            className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200  below-430:text-[0.8rem]
+             below-380:text-[0.6rem] "
           >
             {" "}
             Google Search{" "}
           </button>
           <button
             onClick={(event) => search(event)}
-            className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200 "
+            className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200  below-380:text-[0.6rem]   below-430:text-[0.8rem]"
           >
             {" "}
             I'm Feeling Lucky{" "}
           </button>
         </div>
-        <div className="  w-[36rem] mt-8 flex">
+        <div className="  w-[36rem] mt-8 flex flex-wrap  below-430:hidden ">
           <p className=" text-sm"> Google Offered in:</p>
-          <div className=" text-sm">
+          <div className=" text-sm ">
             <span className=" hover:underline cursor-pointer px-1 text-blue-800">
               हिन्दी
             </span>
             <span className=" hover:underline cursor-pointer px-1 text-blue-800">
-              {" "}
+              
               বাংলা
             </span>
             <span className=" hover:underline cursor-pointer px-1 text-blue-800">
