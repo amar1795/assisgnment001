@@ -138,13 +138,13 @@ const SearchInput = () => {
 
   return (
     <div className="    flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
-      <SearchIcon className="h-5 mr-3 text-gray-500" />
+      <SearchIcon className="h-5 mr-3 text-gray-500 below-430:h-3" />
       <input
         ref={searchInputRef}
         type="text"
         value={SearchedValue} // Bind the input value to the Redux state
         onChange={handleInputChange} // Handle changes
-        className="flex-grow  focus:outline-none"
+        className="flex-grow  focus:outline-none below-430:text-[0.8rem]"
       />
       {SearchedValue && (
         <div
@@ -192,10 +192,10 @@ const SearchInput = () => {
       )}
 
       <div className=" cursor-pointer">
-        <img src="../../mic.png" className="h-8" />
+        <img src="../../mic.png" className="h-8 below-430:h-5" />
       </div>
       <div className=" cursor-pointer">
-        <img src="../../lens.png" className="h-8" />
+        <img src="../../lens.png" className="h-8 below-430:h-5" />
       </div>
     </div>
   );

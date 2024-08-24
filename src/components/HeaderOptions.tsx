@@ -3,7 +3,7 @@ import { DotsVerticalIcon, MapIcon, NewspaperIcon, PhotographIcon, PlayIcon, Sea
 
 function HeaderOptions() {
   return (
-    <div className="flex w-full text-gray-700 justify-evenly text-sm lg:text-base lg:justify-start lg:space-x-36 lg:pl-52 border-b">
+    <div className="flex  below-380:flex-col below-380:items-center below-380:pb-4   w-full text-gray-700 justify-evenly text-sm lg:text-base lg:justify-start lg:space-x-36 lg:pl-52 border-b">
       <div className="flex space-x-6">
         <HeaderOption Icon={SearchIcon} title="Weather" selected/>
         <HeaderOption Icon={PhotographIcon} title="Images" />
@@ -12,7 +12,7 @@ function HeaderOptions() {
         <HeaderOption Icon={MapIcon} title="Maps" />
         <HeaderOption Icon={DotsVerticalIcon} title="More" />
       </div>
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 ">
         <p className="link"> Settings </p>
         <p className="link"> Tools </p>
       </div>
