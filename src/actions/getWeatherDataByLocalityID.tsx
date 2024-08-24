@@ -1,9 +1,15 @@
+"use server"
+import { PrismaClient } from '@prisma/client';
+import { cache } from 'react';
+
+
+
 export const fetchWeatherDataByLocalityId = async (localityId) => {
     if (!localityId) {
         throw new Error("Locality ID is required");
     }
 
-    const apiKey = 'cd256ecc8fb3b6cf2e0b8163edcbc9c5';  // Replace with your actual API key
+    const apiKey = process.env.ZOMATO_API_KEY;  // Replace with your actual API key
     const apiUrl = `https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`;
 
     try {
@@ -24,3 +30,5 @@ export const fetchWeatherDataByLocalityId = async (localityId) => {
         throw new Error("Failed to fetch weather data by locality ID");
     }
 };
+
+
