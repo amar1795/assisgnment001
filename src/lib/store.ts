@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import searchedValue from "../lib/features/product/SearchedValueSlice";
+import localityid from "../lib/features/product/SearchedValueSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       searchedValue: searchedValue,
+      // LocalityID:localityid,
     }
   })
 }
