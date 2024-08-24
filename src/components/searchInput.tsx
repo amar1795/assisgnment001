@@ -112,8 +112,8 @@ const SearchInput = () => {
       return;
     }
 
-    alert("You have searched for " + term);
-    setSearchTerm(term);
+    // alert("You have searched for " + term);
+    // setSearchTerm(term);
     // router.push(`/search?term=${term}`);
     setShowDropdown(false); // Hide dropdown when search is initiated
   };
@@ -126,7 +126,7 @@ const SearchInput = () => {
     setShowDropdown(false);
     dispatch(setSearchValue(localityName));
     dispatch(setLocalityID(localityid)); // Dispatch an action to update the Redux state
-    router.push(`/search?term=${localityName}`);
+    router.push(`/search`);
   };
 
   // Update the Redux store when the input value changes
@@ -163,7 +163,7 @@ const SearchInput = () => {
       {showDropdown && (
         <div
           ref={dropdownRef} // Add ref to the dropdown container
-          className="absolute bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5   "
+          className="absolute z-50 bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5   "
         >
           {suggestions.length > 0 ? (
             (console.log("Suggestions", suggestions),

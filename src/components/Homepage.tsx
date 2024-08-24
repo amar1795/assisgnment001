@@ -83,9 +83,8 @@ export default function HomePage() {
       return;
     }
 
-    alert("You have searched for " + term);
     setSearchTerm(term);
-    // router.push(`/search?term=${term}`);
+    router.push(`/search`);
     setShowDropdown(false); // Hide dropdown when search is initiated
   };
 

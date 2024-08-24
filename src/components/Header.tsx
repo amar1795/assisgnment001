@@ -7,6 +7,7 @@ import HeaderOptions from "./HeaderOptions";
 import SearchInput from "./searchInput";
 import { useAppSelector, useAppStore } from "@/lib/hook";
 import { fetchWeatherDataByLocalityId } from "@/actions/getWeatherDataByLocalityID";
+import WeatherCard from "./weatherCard";
 // {
 //   "status": "200",
 //   "message": "",
@@ -21,6 +22,24 @@ import { fetchWeatherDataByLocalityId } from "@/actions/getWeatherDataByLocality
 //   }
 // }
 
+const getFormattedDateTime = () => {
+  // Get current date and time
+  const now = new Date();
+
+  // Convert to IST (GMT+5:30)
+  const istTime = now.toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    weekday: 'long',   // Day of the week
+    year: 'numeric',   // Year
+    month: 'long',     // Month
+    day: 'numeric',    // Day
+    hour: '2-digit',   // Hours
+    minute: '2-digit', // Minutes
+  });
+
+  return istTime;
+};
+
 function Header() {
   const router = useRouter();
   const searchInputRef = useRef(null);
@@ -33,7 +52,11 @@ function Header() {
   const [rainIntensity, setRainIntensity] = useState("");
   const [rainAccumulation, setRainAccumulation] = useState("");
   const [weatherCondtion, setWeatherCondition] = useState("");
+  const [backgroundVideo, setBackgroundVideo] = useState("");
+  const [dateTime, setDateTime] = useState(getFormattedDateTime());
+const[weatherConditionPicSource,setWeatherConditionPicSource]=useState(""); 
   console.log("this is the localityData", localityData);
+  console.log("this is the background video", backgroundVideo);
 
   const search = (event) => {
     event.preventDefault();
@@ -105,10 +128,53 @@ function Header() {
 
       const todaysWeather = determineWeatherCondition(data);
       setWeatherCondition(todaysWeather);
-    
+      if(todaysWeather==="Sunny"){
+        setBackgroundVideo("../../../sunny.mp4")
+        setWeatherConditionPicSource("../../../weather/SunnyPic.png")
+      }
+      else if(todaysWeather==="Light Rain"){
+        setBackgroundVideo("../../../rain.mp4")
+        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+      }
+      else if(todaysWeather==="Moderate Rain"){
+        setBackgroundVideo("../../../rain.mp4")
+        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+
+      }
+      else if(todaysWeather==="Heavy Rain"){
+        setBackgroundVideo("../../../heavy_rain.mp4")
+        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+
+      }
+      else if(todaysWeather==="Extreme Rain"){
+        setBackgroundVideo("../../../heavy_rain.mp4")
+        setWeatherConditionPicSource("../../../weather/erainPic.png")
+
+      }
+      else if(todaysWeather==="Foggy"){
+        setBackgroundVideo("../../../foggy.mp4")
+        setWeatherConditionPicSource("../../../weather/foggyPic.png")
+
+      }
+      else if(todaysWeather==="Cloudy"){
+        setBackgroundVideo("../../../cloudy.mp4")
+        setWeatherConditionPicSource("../../../weather/cloudyPic.png")
+
+      }
+
     };
     getData();
   }, [searchedLocalityID]);
+
+  useEffect(() => {
+    // Update the date and time every second
+    const intervalId = setInterval(() => {
+      setDateTime(getFormattedDateTime());
+    }, 60000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <header className="sticky top-0 bg-white">
@@ -144,19 +210,66 @@ function Header() {
 
       {/* Options */}
       <HeaderOptions />
-      <div className="  h-[100vh] w-full">
-        <h1 className=" text-[5rem]">{searchedLocalityID}</h1>
-        <h1 className=" text-[2rem]">
-          This is the locality Data for city {searchedPlaceName}
-        </h1>
-        <h1>{JSON.stringify(localityData)}</h1>
-        <h1>Temperature:{temperature}</h1>
+      <div className=" relative   w-full text-white ">
+      <video  key={backgroundVideo}  className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+    autoPlay
+    loop
+    muted
+    preload="none">
+      <source src={backgroundVideo} type="video/mp4" />
+      <track
+        src="/path/to/captions.vtt"
+        kind="subtitles"
+        srcLang="en"
+        label="English"
+      />
+    </video>
+    <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 -z-10"></div>
+
+       <div className=" px-[3rem] ">
+      <div className=" top">
+      <h1 className=" pt-[2rem] text-[2rem]">Today's Weather Forecast</h1>
+        <div className=" flex items-center">
+        <h1 className=" text-[5rem] ">{weatherCondtion} </h1>
+        <img src={weatherConditionPicSource} alt="" className=" h-[15rem] ml-9 " />
+        </div>
+
+        <h1 className=" text-[2rem] ">{searchedPlaceName},<span className=" text-[1.2rem] ml-2 font-bold">
+        {dateTime}</span></h1>
+
+        {/* <h1>{JSON.stringify(localityData)}</h1> */}
+        {/* <h1>Temperature:{temperature}</h1>
         <h1> humidity:{humidity}</h1>
         <h1> windSpeed:{windSpeed}</h1>
         <h1> windDirection:{windDirection}</h1>
         <h1> rainIntensity:{rainIntensity}</h1>
         <h1> rainAccumulation:{rainAccumulation}</h1>
-        <h1> Todays Weather:{weatherCondtion}</h1>
+        <h1> Todays Weather:{weatherCondtion}</h1> */}
+      </div>
+
+      <div className=" bottom min-h-[80vh]  flex  pt-12 gap-8 p-4 flex-wrap  ">
+{/* sfdghldkk */}
+
+{/* <div className="bg-white/10 backdrop-blur-md h-[15rem] w-[20rem] rounded-[10%] flex shadow-lg border border-white/10">
+  <div className="left w-[60%] flex flex-col items-center justify-center">
+    <h1 className="text-[1.5rem]">Temperature</h1>
+    <h1 className="font-bold">{temperature} C</h1>
+  </div>
+  <div className="right w-[40%] flex items-center justify-center">
+    <img src="../../../weather details/temperature.png" alt="" className="h-[5rem] w-[5rem]" />
+  </div>
+</div> */}
+{/* title,detail,source */}
+  <WeatherCard title={"Temperature"} detail={temperature} source={"../../../weather details/temperature.png"} />
+  <WeatherCard title={"Humidity"} detail={humidity} source={"../../../weather details/humidity.png"} />
+  <WeatherCard title={"Wind Speed"} detail={windSpeed} source={"../../../weather details/windspeed.png"} />
+  <WeatherCard title={"Wind Direction"} detail={windDirection} source={"../../../weather details/winddirection.png"} />
+  <WeatherCard title={"Rain Intensity"} detail={rainIntensity} source={"../../../weather details/rainintensity.png"} />
+  <WeatherCard title={"Rain Accumulation"} detail={rainAccumulation} source={"../../../weather details/rainaccum.png"} />
+
+      </div>
+      
+       </div>
       </div>
     </header>
   );
