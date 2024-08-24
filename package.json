@@ -14,6 +14,7 @@
     "schema": "./prisma/schema.prisma"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.2.0",
     "@heroicons/react": "^1.0.6",
     "@prisma/client": "^5.18.0",
     "@reduxjs/toolkit": "^2.2.7",
