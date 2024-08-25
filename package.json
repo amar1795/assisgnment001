@@ -29,6 +29,7 @@
     "react-redux": "^9.1.2"
   },
   "devDependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.18.0",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.16.1",
     "@types/react": "^18",
