@@ -56,15 +56,13 @@ To get started with the project locally, follow these steps:
    ```bash
   npm install
 
-3. 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/weather-application.git
-   cd weather-application
-4. **Set Up Environment Variables: Create a .env.local file in the root directory and add your environment variables. Example:**
+3. **Set Up Environment Variables: Create a .env.local file in the root directory and add your environment variables. Example:**
     MONGODB_URI=your_mongodb_uri
     NEXT_PUBLIC_API_URL=your_api_url
-5. **Run the Development Server: Start the development server with:**:
+
+4. **Run the Development Server: Start the development server with:**
     npm run dev
+5. **View the Application: Open your browser and navigate to http://localhost:3000 to view the application.**
 
 ## Usage
 
