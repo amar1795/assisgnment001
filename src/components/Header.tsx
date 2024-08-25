@@ -265,15 +265,6 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
       <div className=" bottom min-h-[80vh]  flex  pt-12 gap-8 below-430:gap-1   p-4 flex-wrap  below-770:justify-around  ">
 {/* sfdghldkk */}
 
-{/* <div className="bg-white/10 backdrop-blur-md h-[15rem] w-[20rem] rounded-[10%] flex shadow-lg border border-white/10">
-  <div className="left w-[60%] flex flex-col items-center justify-center">
-    <h1 className="text-[1.5rem]">Temperature</h1>
-    <h1 className="font-bold">{temperature} C</h1>
-  </div>
-  <div className="right w-[40%] flex items-center justify-center">
-    <img src="../../../weather details/temperature.png" alt="" className="h-[5rem] w-[5rem]" />
-  </div>
-</div> */}
 {/* title,detail,source */}
   <WeatherCard title={"Temperature"} detail={temperature} metric={"C"} source={"../../../weather details/temperature.png"} />
   <WeatherCard title={"Humidity"} detail={humidity} metric={"%"} source={"../../../weather details/humidity.png"} />
