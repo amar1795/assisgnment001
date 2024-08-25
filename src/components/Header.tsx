@@ -9,19 +9,9 @@ import { fetchWeatherDataByLocalityId } from "@/actions/getWeatherDataByLocality
 import WeatherCard from "./weatherCard";
 import { setSearchValue } from "@/lib/features/product/SearchedValueSlice";
 import Spinner from "./loader/spinner";
-// {
-//   "status": "200",
-//   "message": "",
-//   "device_type": 1,
-//   "locality_weather_data": {
-//       "temperature": 32.35,
-//       "humidity": 78.74,
-//       "wind_speed": null,
-//       "wind_direction": 0,
-//       "rain_intensity": 0.4,
-//       "rain_accumulation": 2.6
-//   }
-// }
+import { setHumidity, setRainAccumulation, setRainIntensity, setTemperature, setWeatherCondition, setWindDirection, setWindSpeed } from "@/lib/features/weather/WeatherDataSlice";
+import { setBackgroundVideo, setDateTime, setLoading, setLocalityData, setSearchedPlaceName, setWeatherConditionPicSource } from "@/lib/features/weatherDetail/WeatherDetailSlice";
+
 
 const getFormattedDateTime = () => {
   // Get current date and time
@@ -44,20 +34,9 @@ const getFormattedDateTime = () => {
 function Header() {
   const router = useRouter();
   const searchInputRef = useRef(null);
-  const [localityData, setLocalityData] = useState("");
-  const [searchedPlaceName, setSearchedPlaceName] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [windSpeed, setWindSpeed] = useState("");
-  const [windDirection, setWindDirection] = useState("");
-  const [rainIntensity, setRainIntensity] = useState("");
-  const [rainAccumulation, setRainAccumulation] = useState("");
-  const [weatherCondtion, setWeatherCondition] = useState("");
-  const [backgroundVideo, setBackgroundVideo] = useState("");
-  const [dateTime, setDateTime] = useState(getFormattedDateTime());
-const[weatherConditionPicSource,setWeatherConditionPicSource]=useState(""); 
-const [searchTerm, setSearchTerm] = useState("");
-const [loading, setLoading] = useState(true);
+
+
+  const [searchTerm, setSearchTerm] = useState("");
 
 const dispatch = useAppDispatch();
 
@@ -77,6 +56,8 @@ const dispatch = useAppDispatch();
     searchInputRef.current.value = term;
   };
 
+
+
   // Initialize the store with the product information
   const store = useAppStore();
   const initialized = useRef(false);
@@ -91,6 +72,21 @@ const dispatch = useAppDispatch();
     (state) => state.searchedValue.localityID
   );
 
+  const localityData = useAppSelector((state) => state.WeatherDetailData.localityData);
+  const searchedPlaceName = useAppSelector((state) => state.WeatherDetailData.searchedPlaceName);
+  const backgroundVideo = useAppSelector((state) => state.WeatherDetailData.backgroundVideo);
+  const dateTime = useAppSelector((state) => state.WeatherDetailData.dateTime);
+  const weatherConditionPicSource = useAppSelector((state) => state.WeatherDetailData.weatherConditionPicSource);
+  // const searchTerm = useAppSelector((state) => state.WeatherDetailData.searchTerm);   
+  const loading = useAppSelector((state) => state.WeatherDetailData.loading);
+
+  const temperature = useAppSelector((state) => state.WeatherData.temperature);
+  const humidity = useAppSelector((state) => state.WeatherData.humidity);
+  const windSpeed = useAppSelector((state) => state.WeatherData.windSpeed);
+  const windDirection = useAppSelector((state) => state.WeatherData.windDirection);
+  const rainIntensity = useAppSelector((state) => state.WeatherData.rainIntensity);
+  const rainAccumulation = useAppSelector((state) => state.WeatherData.rainAccumulation);
+  const weatherCondtion = useAppSelector((state) => state.WeatherData.weatherCondition);
 
   function determineWeatherCondition(data) {
     // Convert rain intensity from mm/h to mm/day for easier classification
@@ -117,59 +113,66 @@ const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true); // Start loading
+      dispatch(setLoading(true)); // Start loading
 
-      setSearchedPlaceName(SearchedValue);
+      dispatch(setSearchedPlaceName(SearchedValue));
 
       if (!searchedLocalityID) {
         return;
       }
 
       const data = await fetchWeatherDataByLocalityId(searchedLocalityID);
-      setLocalityData(data);
-      setTemperature(data.locality_weather_data.temperature || 0);
-      setHumidity(data.locality_weather_data.humidity || 0);
-      setWindSpeed(data.locality_weather_data.wind_speed || 0);
-      setWindDirection(data.locality_weather_data.wind_direction || 0);
-      setRainIntensity(data.locality_weather_data.rain_intensity || 0);
-      setRainAccumulation(data.locality_weather_data.rain_accumulation || 0);
+      dispatch(setLocalityData(data));
+      dispatch(setTemperature(data.locality_weather_data.temperature || 0));
+      dispatch(setHumidity(data.locality_weather_data.humidity || 0));
+      dispatch(setWindSpeed(data.locality_weather_data.wind_speed || 0));
+      dispatch(setWindDirection(data.locality_weather_data.wind_direction || 0));
+      dispatch(setRainIntensity(data.locality_weather_data.rain_intensity || 0));
+      dispatch(setRainAccumulation(data.locality_weather_data.rain_accumulation || 0));
+      dispatch(setWeatherCondition(determineWeatherCondition(data)));
+      // setTemperature(data.locality_weather_data.temperature || 0);
+      // setHumidity(data.locality_weather_data.humidity || 0);
+      // setWindSpeed(data.locality_weather_data.wind_speed || 0);
+      // setWindDirection(data.locality_weather_data.wind_direction || 0);
+      // setRainIntensity(data.locality_weather_data.rain_intensity || 0);
+      // setRainAccumulation(data.locality_weather_data.rain_accumulation || 0);
 
       const todaysWeather = determineWeatherCondition(data);
       setWeatherCondition(todaysWeather);
       if(todaysWeather==="Sunny"){
-        setBackgroundVideo("../../../sunny.mp4")
-        setWeatherConditionPicSource("../../../weather/SunnyPic.png")
+        dispatch(setBackgroundVideo("../../../sunny.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/SunnyPic.png"))
       }
       else if(todaysWeather==="Light Rain"){
-        setBackgroundVideo("../../../rain.mp4")
-        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+        dispatch(setBackgroundVideo("../../../rain.mp4"))
+    dispatch(setWeatherConditionPicSource("../../../weather/mrainPic.png"))
       }
       else if(todaysWeather==="Moderate Rain"){
-        setBackgroundVideo("../../../rain.mp4")
-        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+        dispatch(setBackgroundVideo("../../../rain.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/mrainPic.png"))
 
       }
       else if(todaysWeather==="Heavy Rain"){
-        setBackgroundVideo("../../../heavy_rain.mp4")
-        setWeatherConditionPicSource("../../../weather/mrainPic.png")
+        dispatch(setBackgroundVideo("../../../heavy_rain.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/mrainPic.png"))
 
       }
       else if(todaysWeather==="Extreme Rain"){
-        setBackgroundVideo("../../../heavy_rain.mp4")
-        setWeatherConditionPicSource("../../../weather/erainPic.png")
+        dispatch(setBackgroundVideo("../../../heavy_rain.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/erainPic.png"))
 
       }
       else if(todaysWeather==="Foggy"){
-        setBackgroundVideo("../../../foggy.mp4")
-        setWeatherConditionPicSource("../../../weather/foggyPic.png")
+        dispatch(setBackgroundVideo("../../../foggy.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/foggyPic.png"))
 
       }
       else if(todaysWeather==="Cloudy"){
-        setBackgroundVideo("../../../cloudy.mp4")
-        setWeatherConditionPicSource("../../../weather/cloudyPic.png")
+        dispatch(setBackgroundVideo("../../../cloudy.mp4"))
+        dispatch(setWeatherConditionPicSource("../../../weather/cloudyPic.png"))
 
       }
-      setLoading(false); // Stop loading when data is fully set
+      dispatch(setLoading(false)); // Stop loading when data is fully set
 
     };
     getData();
@@ -178,14 +181,14 @@ const dispatch = useAppDispatch();
   useEffect(() => {
     // Update the date and time every second
     const intervalId = setInterval(() => {
-      setDateTime(getFormattedDateTime());
+      dispatch(setDateTime(getFormattedDateTime()));
     }, 60000);
 
     // Clear interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleClick = () => {
+  const handleClick = async() => {
     setSearchTerm("");
     dispatch(setSearchValue("")); // Dispatch an action to update the Redux state
     router.push("/");
@@ -245,7 +248,7 @@ const dispatch = useAppDispatch();
         </div> // Your loading indicator
       ) : (
         <> {/* Options */}
-      <div className=" relative   w-full text-white ">
+      <div className=" relative   w-full text-white ">     
       <video  key={backgroundVideo}  className="absolute top-0 left-0 w-full h-full object-cover -z-10"
     autoPlay
     loop

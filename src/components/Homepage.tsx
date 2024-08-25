@@ -1,106 +1,16 @@
 "use client";
 
-import { use, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+
 import Head from "next/head";
 import Avatar from "../components/Avatar";
 import Footer from "../components/Footer";
-import { MicrophoneIcon, ViewGridIcon } from "@heroicons/react/solid";
-import { SearchIcon } from "@heroicons/react/outline";
 import Image from "next/image";
-import { fetchAllWeatherStations } from "@/actions/fetchWeather";
-import { fetchWeatherStationsByLocality } from "@/actions/getWeatherByLocalityName";
-import debounce from "lodash.debounce";
 import SearchInput from "./searchInput";
-import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hook";
-import { setSearchValue } from "@/lib/features/product/SearchedValueSlice";
+
 
 export default function HomePage() {
-  const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [cityName, setCityName] = useState("");
-  const dropdownRef = useRef(null); // Ref for dropdown container
-
-  // console.log("This is the fetched Data", data);
-
-
-
-
-  useEffect(() => {
-    const trimmedTerm = searchTerm.trim(); // Trim whitespace from the search term
-  
-    if (trimmedTerm !== "") {
-      // Use a debounced function
-      const debouncedFetch = debounce(async () => {
-        try {
-          const data = await fetchWeatherStationsByLocality({
-            localityName: trimmedTerm,
-            page: 1,
-            limit: 25,
-            sortOrder: "desc",
-          });
-  
-          setSuggestions(data);
-          setShowDropdown(data.length > 0); // Only show dropdown if there are results
-        } catch (error) {
-          console.error("Error fetching suggestions:", error);
-        }
-      }, 300); // 300ms debounce
-  
-      debouncedFetch();
-  
-      return () => debouncedFetch.cancel();
-    } else {
-      setShowDropdown(false); // Hide dropdown for empty or whitespace-only input
-    }
-  }, [searchTerm]);
-  
   
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        searchInputRef.current &&
-        !searchInputRef.current.contains(event.target)
-      ) {
-        setShowDropdown(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const searchInputRef = useRef(null);
-  const router = useRouter();
-
-  const search = (event) => {
-    event.preventDefault();
-    const term = searchInputRef.current.value;
-
-    if (!term) {
-      return;
-    }
-
-    setSearchTerm(term);
-    router.push(`/search`);
-    setShowDropdown(false); // Hide dropdown when search is initiated
-  };
-
-  const handleClick = (localityName) => {
-    setSearchTerm(localityName);
-    setCityName(localityName);
-    searchInputRef.current.value = localityName; // Set the value in the input field
-
-    setShowDropdown(false);
-    router.push(`/search?term=${localityName}`);
-  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -170,7 +80,7 @@ export default function HomePage() {
             Google Search{" "}
           </button>
           <button
-            onClick={(event) => search(event)}
+            // onClick={(event) => search(event)}
             className=" text-sm bg-slate-100  py-2 px-4  rounded-md  hover:bg-slate-200  below-380:text-[0.6rem]   below-430:text-[0.8rem]"
           >
             {" "}

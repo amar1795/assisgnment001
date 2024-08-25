@@ -1,7 +1,10 @@
 import { fetchWeatherStationsByLocality } from "@/actions/getWeatherByLocalityName";
 import {
+  setCityName,
   setLocalityID,
   setSearchValue,
+  setShowDropdown,
+  setSuggestions,
 } from "@/lib/features/product/SearchedValueSlice";
 import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hook";
 import { SearchIcon } from "@heroicons/react/solid";
@@ -10,11 +13,10 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const SearchInput = ({searchPage}:{searchPage:boolean}) => {
-  const [data, setData] = useState([]);
+  
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [cityName, setCityName] = useState("");
+
+
   const dropdownRef = useRef(null); // Ref for dropdown container
 
   // console.log("this is Data", suggestions);
@@ -32,6 +34,13 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
   const searchedLocalityID = useAppSelector(
     (state) => state.searchedValue.localityID
   );
+
+  const suggestions =useAppSelector((state) => state.searchedValue.suggestions);
+  const showDropdown = useAppSelector((state) => state.searchedValue.showDropdown);
+  const cityName = useAppSelector((state) => state.searchedValue.cityName);
+
+
+
   const dispatch = useAppDispatch();
 
   // console.log("this is the searchedLocalityID", searchedLocalityID);
@@ -69,8 +78,9 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
           sortOrder: "desc",
         });
 
-        setSuggestions(data); // Use data for suggestions
-        setShowDropdown(true); // Show dropdown when there are suggestions
+        
+        dispatch(setSuggestions(data)); // Use data for suggestions
+        dispatch(setShowDropdown(true)); // Show dropdown when there are suggestions
       }, 500); // 500ms debounce delay
 
       debouncedFetch();
@@ -80,7 +90,7 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
         debouncedFetch.cancel();
       };
     } else {
-      setShowDropdown(false); // Hide dropdown when searchTerm is empty or matches cityName
+      dispatch(setShowDropdown(false)); // Hide dropdown when searchTerm is empty or matches cityName
     }
   }, [searchTerm]);
 
@@ -92,7 +102,7 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
         searchInputRef.current &&
         !searchInputRef.current.contains(event.target)
       ) {
-        setShowDropdown(false);
+        dispatch(setShowDropdown(false));
       }
     };
 
@@ -113,18 +123,16 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
       return;
     }
 
-    // alert("You have searched for " + term);
-    // setSearchTerm(term);
-    // router.push(`/search?term=${term}`);
-    setShowDropdown(false); // Hide dropdown when search is initiated
+  
+    dispatch(setShowDropdown(false)); // Hide dropdown when search is initiated
   };
 
   const handleClick = (localityName, localityid) => {
     setSearchTerm(localityName);
-    setCityName(localityName);
+    dispatch(setCityName(localityName));
     searchInputRef.current.value = localityName; // Set the value in the input field
 
-    setShowDropdown(false);
+    dispatch(setShowDropdown(false));
     dispatch(setSearchValue(localityName));
     dispatch(setLocalityID(localityid)); // Dispatch an action to update the Redux state
     router.push(`/search`);
@@ -152,8 +160,8 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
           className="cursor-pointer text-gray-500 border-r-2 pr-3 "
           onClick={() => {
             setSearchTerm("");
-            setSuggestions([]);
-            setShowDropdown(false);
+            dispatch(setSuggestions([]));
+            dispatch(setShowDropdown(false));
             dispatch(setSearchValue("")); // Clear the Redux state
           }}
         >

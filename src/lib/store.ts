@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import searchedValue from "../lib/features/product/SearchedValueSlice";
-import localityid from "../lib/features/product/SearchedValueSlice";
+import WeatherData from "../lib/features/weather/WeatherDataSlice";
+import WeatherDetailData from "./features/weatherDetail/WeatherDetailSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       searchedValue: searchedValue,
-      // LocalityID:localityid,
+      WeatherData:WeatherData,
+      WeatherDetailData:WeatherDetailData
+
     }
   })
 }
