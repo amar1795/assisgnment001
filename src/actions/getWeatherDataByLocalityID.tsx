@@ -1,8 +1,5 @@
 "use server"
 
-
-
-
 export const fetchWeatherDataByLocalityId = async (localityId:any) => {
 
 

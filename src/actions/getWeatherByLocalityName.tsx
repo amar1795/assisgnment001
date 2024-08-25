@@ -1,6 +1,9 @@
 "use server"
-import { prismadb } from '@/lib/db';
+// import { prismadb } from '@/lib/db';
+import { PrismaClient } from '@prisma/client';
+
 import { cache } from 'react';
+const prismadb = new PrismaClient();
 
 
 export const fetchWeatherStationsByLocality = cache(async ({ localityName, page = 1, limit = 5, sortOrder = 'desc' }) => {
