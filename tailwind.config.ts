@@ -16,7 +16,7 @@ const config: Config = {
       screens: {
         'below-1150': {'max': '1150px'},
         'below-770': {'max': '770px'},
-        'below-430': {'max': '430px'},
+        'below-430': {'max': '440px'},
         'below-380': {'max': '380px'},
       }
       
