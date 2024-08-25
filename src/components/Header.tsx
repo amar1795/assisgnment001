@@ -43,18 +43,18 @@ const dispatch = useAppDispatch();
   // console.log("this is the localityData", localityData);
   // console.log("this is the background video", backgroundVideo);
 
-  const search = (event) => {
-    event.preventDefault();
-    const term = searchInputRef.current.value;
+  // const search = (event) => {
+  //   event.preventDefault();
+  //   const term = searchInputRef.current.value;
 
-    if (!term) {
-      return;
-    }
+  //   if (!term) {
+  //     return;
+  //   }
 
-    router.push(`/search?value=${term}`);
+  //   router.push(`/search?value=${term}`);
 
-    searchInputRef.current.value = term;
-  };
+  //   searchInputRef.current.value = term;
+  // };
 
 
 
@@ -88,7 +88,7 @@ const dispatch = useAppDispatch();
   const rainAccumulation = useAppSelector((state) => state.WeatherData.rainAccumulation);
   const weatherCondtion = useAppSelector((state) => state.WeatherData.weatherCondition);
 
-  function determineWeatherCondition(data) {
+  function determineWeatherCondition(data: any) {
     // Convert rain intensity from mm/h to mm/day for easier classification
     const dailyRainIntensity = data.locality_weather_data.rain_intensity * 24;
   
@@ -201,6 +201,7 @@ const dispatch = useAppDispatch();
           <Image
             loading="lazy"
             src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            alt="Google logo"
             width={120}
             height={40}
             onClick={handleClick}
@@ -216,6 +217,7 @@ const dispatch = useAppDispatch();
           <Image
             loading="lazy"
             src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            alt="Google logo"
             width={120}
             height={40}
             onClick={() => router.push("/")}

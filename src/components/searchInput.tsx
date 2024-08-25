@@ -12,12 +12,19 @@ import debounce from "lodash.debounce";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
+
+interface Suggestion {
+  id: string | number;
+  localityName: string;
+  localityId: string | number;
+}
+
 const SearchInput = ({searchPage}:{searchPage:boolean}) => {
   
   const [searchTerm, setSearchTerm] = useState("");
 
 
-  const dropdownRef = useRef(null); // Ref for dropdown container
+  const dropdownRef = useRef<HTMLDivElement>(null); // Ref for dropdown container
 
   // console.log("this is Data", suggestions);
 
@@ -95,12 +102,12 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
   }, [searchTerm]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event:MouseEvent) => {
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
+        !dropdownRef.current.contains(event.target as Node) &&
         searchInputRef.current &&
-        !searchInputRef.current.contains(event.target)
+        !searchInputRef.current.contains(event.target as Node)
       ) {
         dispatch(setShowDropdown(false));
       }
@@ -112,26 +119,17 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
     };
   }, []);
 
-  const searchInputRef = useRef(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  const search = (event) => {
-    event.preventDefault();
-    const term = searchInputRef.current.value;
 
-    if (!term) {
-      return;
-    }
 
-  
-    dispatch(setShowDropdown(false)); // Hide dropdown when search is initiated
-  };
-
-  const handleClick = (localityName, localityid) => {
+  const handleClick = (localityName: string, localityid: string | number) => {
     setSearchTerm(localityName);
     dispatch(setCityName(localityName));
-    searchInputRef.current.value = localityName; // Set the value in the input field
-
+    if (searchInputRef.current) {
+      searchInputRef.current.value = localityName; // Set the value in the input field
+    }
     dispatch(setShowDropdown(false));
     dispatch(setSearchValue(localityName));
     dispatch(setLocalityID(localityid)); // Dispatch an action to update the Redux state
@@ -139,9 +137,9 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
   };
 
   // Update the Redux store when the input value changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    setSearchTerm(e.target.value);
+    setSearchTerm(newValue.trim());
     dispatch(setSearchValue(newValue)); // Dispatch an action to update the Redux state
   };
 
@@ -178,7 +176,7 @@ const SearchInput = ({searchPage}:{searchPage:boolean}) => {
             
             (
               <ul>
-                {suggestions.map((suggestion) => (
+                {suggestions.map((suggestion:Suggestion) => (
                   <li
                     key={suggestion.id}
                     className="p-2 cursor-pointer hover:bg-gray-100"

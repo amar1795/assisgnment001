@@ -15,7 +15,7 @@ export const fetchWeatherDataByLocalityId = async (localityId:any) => {
     try {
         const response = await fetch(apiUrl, {
             headers: {
-                'X-Zomato-Api-Key': apiKey,  // Include the API key in the headers
+                'X-Zomato-Api-Key': apiKey,  
             },
         });
 

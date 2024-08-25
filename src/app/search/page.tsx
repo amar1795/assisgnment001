@@ -11,15 +11,10 @@ import { useAppDispatch, useAppSelector, useAppStore } from '@/lib/hook'
 const page = () => {
     const router = useRouter();
 
-  
-  const dispatch = useAppDispatch();
 
   return (
     <div>
-    <Head>
-      <title> {router?.query?.value} - Google Search </title>
-      <link rel="icon" href="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png"/>
-    </Head>
+    
 
     {/*  Header */}
 
