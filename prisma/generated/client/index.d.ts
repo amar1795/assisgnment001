@@ -34,8 +34,8 @@ export type WeatherStation = $Result.DefaultSelection<Prisma.$WeatherStationPayl
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
 export class PrismaClient<
-  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -55,7 +55,7 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  constructor(optionsArg ?: Prisma.Subset<T, Prisma.PrismaClientOptions>);
   $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
 
   /**
@@ -107,7 +107,7 @@ export class PrismaClient<
    */
   $runCommandRaw(command: Prisma.InputJsonObject): Prisma.PrismaPromise<Prisma.JsonObject>
 
-  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
+  $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
    * `prisma.weatherStation`: Exposes CRUD operations for the **WeatherStation** model.
@@ -175,8 +175,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.18.0
-   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
+   * Prisma Client JS version: 5.14.0
+   * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
    */
   export type PrismaVersion = {
     client: string
@@ -605,86 +605,87 @@ export namespace Prisma {
     db?: Datasource
   }
 
-  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs, clientOptions: PrismaClientOptions }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs'], this['params']['clientOptions']>
+
+  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs}, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs']>
   }
 
-  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: "weatherStation"
+      modelProps: 'weatherStation'
       txIsolationLevel: never
-    }
+    },
     model: {
       WeatherStation: {
         payload: Prisma.$WeatherStationPayload<ExtArgs>
         fields: Prisma.WeatherStationFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.WeatherStationFindUniqueArgs<ExtArgs>
+            args: Prisma.WeatherStationFindUniqueArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.WeatherStationFindUniqueOrThrowArgs<ExtArgs>
+            args: Prisma.WeatherStationFindUniqueOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           findFirst: {
-            args: Prisma.WeatherStationFindFirstArgs<ExtArgs>
+            args: Prisma.WeatherStationFindFirstArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.WeatherStationFindFirstOrThrowArgs<ExtArgs>
+            args: Prisma.WeatherStationFindFirstOrThrowArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           findMany: {
-            args: Prisma.WeatherStationFindManyArgs<ExtArgs>
+            args: Prisma.WeatherStationFindManyArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>[]
           }
           create: {
-            args: Prisma.WeatherStationCreateArgs<ExtArgs>
+            args: Prisma.WeatherStationCreateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           createMany: {
-            args: Prisma.WeatherStationCreateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.WeatherStationCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.WeatherStationDeleteArgs<ExtArgs>
+            args: Prisma.WeatherStationDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           update: {
-            args: Prisma.WeatherStationUpdateArgs<ExtArgs>
+            args: Prisma.WeatherStationUpdateArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           deleteMany: {
-            args: Prisma.WeatherStationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.WeatherStationDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.WeatherStationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
+            args: Prisma.WeatherStationUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.WeatherStationUpsertArgs<ExtArgs>
+            args: Prisma.WeatherStationUpsertArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$WeatherStationPayload>
           }
           aggregate: {
-            args: Prisma.WeatherStationAggregateArgs<ExtArgs>
+            args: Prisma.WeatherStationAggregateArgs<ExtArgs>,
             result: $Utils.Optional<AggregateWeatherStation>
           }
           groupBy: {
-            args: Prisma.WeatherStationGroupByArgs<ExtArgs>
+            args: Prisma.WeatherStationGroupByArgs<ExtArgs>,
             result: $Utils.Optional<WeatherStationGroupByOutputType>[]
           }
           findRaw: {
-            args: Prisma.WeatherStationFindRawArgs<ExtArgs>
-            result: JsonObject
+            args: Prisma.WeatherStationFindRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
           }
           aggregateRaw: {
-            args: Prisma.WeatherStationAggregateRawArgs<ExtArgs>
-            result: JsonObject
+            args: Prisma.WeatherStationAggregateRawArgs<ExtArgs>,
+            result: Prisma.JsonObject
           }
           count: {
-            args: Prisma.WeatherStationCountArgs<ExtArgs>
+            args: Prisma.WeatherStationCountArgs<ExtArgs>,
             result: $Utils.Optional<WeatherStationCountAggregateOutputType> | number
           }
         }
@@ -701,7 +702,7 @@ export namespace Prisma {
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export const defineExtension: $Extensions.ExtendsHook<'define', Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -744,7 +745,6 @@ export namespace Prisma {
       timeout?: number
     }
   }
-
 
   /* Types for Logging */
   export type LogLevel = 'info' | 'query' | 'warn' | 'error'
@@ -1057,7 +1057,6 @@ export namespace Prisma {
     deviceType?: boolean
   }, ExtArgs["result"]["weatherStation"]>
 
-
   export type WeatherStationSelectScalar = {
     id?: boolean
     cityName?: boolean
@@ -1067,6 +1066,7 @@ export namespace Prisma {
     longitude?: boolean
     deviceType?: boolean
   }
+
 
 
   export type $WeatherStationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1083,6 +1083,7 @@ export namespace Prisma {
     }, ExtArgs["result"]["weatherStation"]>
     composites: {}
   }
+
 
   type WeatherStationGetPayload<S extends boolean | null | undefined | WeatherStationDefaultArgs> = $Result.GetResult<Prisma.$WeatherStationPayload, S>
 
@@ -1103,8 +1104,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUnique<T extends WeatherStationFindUniqueArgs>(args: SelectSubset<T, WeatherStationFindUniqueArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    **/
+    findUnique<T extends WeatherStationFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationFindUniqueArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
      * Find one WeatherStation that matches the filter or throw an error with `error.code='P2025'` 
@@ -1117,8 +1120,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findUniqueOrThrow<T extends WeatherStationFindUniqueOrThrowArgs>(args: SelectSubset<T, WeatherStationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    **/
+    findUniqueOrThrow<T extends WeatherStationFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
      * Find the first WeatherStation that matches the filter.
@@ -1132,8 +1137,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirst<T extends WeatherStationFindFirstArgs>(args?: SelectSubset<T, WeatherStationFindFirstArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    **/
+    findFirst<T extends WeatherStationFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationFindFirstArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
      * Find the first WeatherStation that matches the filter or
@@ -1148,8 +1155,10 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     */
-    findFirstOrThrow<T extends WeatherStationFindFirstOrThrowArgs>(args?: SelectSubset<T, WeatherStationFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    **/
+    findFirstOrThrow<T extends WeatherStationFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
      * Find zero or more WeatherStations that matches the filter.
@@ -1166,8 +1175,10 @@ export namespace Prisma {
      * // Only select the `id`
      * const weatherStationWithIdOnly = await prisma.weatherStation.findMany({ select: { id: true } })
      * 
-     */
-    findMany<T extends WeatherStationFindManyArgs>(args?: SelectSubset<T, WeatherStationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "findMany">>
+    **/
+    findMany<T extends WeatherStationFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'findMany'>>
 
     /**
      * Create a WeatherStation.
@@ -1180,8 +1191,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    create<T extends WeatherStationCreateArgs>(args: SelectSubset<T, WeatherStationCreateArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    **/
+    create<T extends WeatherStationCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationCreateArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
      * Create many WeatherStations.
@@ -1194,8 +1207,10 @@ export namespace Prisma {
      *   ]
      * })
      *     
-     */
-    createMany<T extends WeatherStationCreateManyArgs>(args?: SelectSubset<T, WeatherStationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    createMany<T extends WeatherStationCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a WeatherStation.
@@ -1208,8 +1223,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    delete<T extends WeatherStationDeleteArgs>(args: SelectSubset<T, WeatherStationDeleteArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    **/
+    delete<T extends WeatherStationDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationDeleteArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
      * Update one WeatherStation.
@@ -1225,8 +1242,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    update<T extends WeatherStationUpdateArgs>(args: SelectSubset<T, WeatherStationUpdateArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    **/
+    update<T extends WeatherStationUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationUpdateArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
      * Delete zero or more WeatherStations.
@@ -1239,8 +1258,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    deleteMany<T extends WeatherStationDeleteManyArgs>(args?: SelectSubset<T, WeatherStationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    deleteMany<T extends WeatherStationDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, WeatherStationDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more WeatherStations.
@@ -1258,8 +1279,10 @@ export namespace Prisma {
      *   }
      * })
      * 
-     */
-    updateMany<T extends WeatherStationUpdateManyArgs>(args: SelectSubset<T, WeatherStationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    **/
+    updateMany<T extends WeatherStationUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one WeatherStation.
@@ -1277,8 +1300,10 @@ export namespace Prisma {
      *     // ... the filter for the WeatherStation we want to update
      *   }
      * })
-     */
-    upsert<T extends WeatherStationUpsertArgs>(args: SelectSubset<T, WeatherStationUpsertArgs<ExtArgs>>): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    **/
+    upsert<T extends WeatherStationUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, WeatherStationUpsertArgs<ExtArgs>>
+    ): Prisma__WeatherStationClient<$Result.GetResult<Prisma.$WeatherStationPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
      * Find zero or more WeatherStations that matches the filter.
@@ -1287,8 +1312,10 @@ export namespace Prisma {
      * const weatherStation = await prisma.weatherStation.findRaw({
      *   filter: { age: { $gt: 25 } } 
      * })
-     */
-    findRaw(args?: WeatherStationFindRawArgs): Prisma.PrismaPromise<JsonObject>
+    **/
+    findRaw(
+      args?: WeatherStationFindRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
 
     /**
      * Perform aggregation operations on a WeatherStation.
@@ -1300,9 +1327,10 @@ export namespace Prisma {
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
-     */
-    aggregateRaw(args?: WeatherStationAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
-
+    **/
+    aggregateRaw(
+      args?: WeatherStationAggregateRawArgs
+    ): Prisma.PrismaPromise<JsonObject>
 
     /**
      * Count the number of WeatherStations.
@@ -1442,29 +1470,30 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export interface Prisma__WeatherStationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
   }
-
 
 
 
