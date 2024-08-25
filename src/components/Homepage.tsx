@@ -28,31 +28,36 @@ export default function HomePage() {
 
 
 
-
   useEffect(() => {
-    if (searchTerm && !showDropdown) {
-      // Define a debounced function
+    const trimmedTerm = searchTerm.trim(); // Trim whitespace from the search term
+  
+    if (trimmedTerm !== "") {
+      // Use a debounced function
       const debouncedFetch = debounce(async () => {
-        const data = await fetchWeatherStationsByLocality({
-          localityName: searchTerm,
-          page: 1,
-          limit: 25,
-          sortOrder: "desc",
-        });
-        setSuggestions(data); // Use data for suggestions
-        setShowDropdown(true); // Show dropdown when there are suggestions
-      }, 300); // 300ms debounce delay
-
+        try {
+          const data = await fetchWeatherStationsByLocality({
+            localityName: trimmedTerm,
+            page: 1,
+            limit: 25,
+            sortOrder: "desc",
+          });
+  
+          setSuggestions(data);
+          setShowDropdown(data.length > 0); // Only show dropdown if there are results
+        } catch (error) {
+          console.error("Error fetching suggestions:", error);
+        }
+      }, 300); // 300ms debounce
+  
       debouncedFetch();
-
-      // Cleanup function to cancel debounce if component unmounts
-      return () => {
-        debouncedFetch.cancel();
-      };
+  
+      return () => debouncedFetch.cancel();
     } else {
-      setShowDropdown(false); // Hide dropdown when searchTerm is empty
+      setShowDropdown(false); // Hide dropdown for empty or whitespace-only input
     }
   }, [searchTerm]);
+  
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -150,7 +155,7 @@ export default function HomePage() {
 
       
         <div className=" w-full flex items-center justify-center    ">
-        <SearchInput/>
+        <SearchInput searchPage={false}/>
         </div>
 
         {/* Buttons */}

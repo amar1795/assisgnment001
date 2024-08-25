@@ -9,7 +9,7 @@ import debounce from "lodash.debounce";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
-const SearchInput = () => {
+const SearchInput = ({searchPage}:{searchPage:boolean}) => {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -57,6 +57,7 @@ const SearchInput = () => {
     localStorage.setItem("searchedLocalityID", searchedLocalityID);
   }, [SearchedValue, searchedLocalityID]);
 
+  
   useEffect(() => {
     if (searchTerm && searchTerm !== cityName && !showDropdown) {
       // Define a debounced function
@@ -163,7 +164,7 @@ const SearchInput = () => {
       {showDropdown && (
         <div
           ref={dropdownRef} // Add ref to the dropdown container
-          className="absolute z-50 bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto top-5 pt-5 below-1150:w-[30rem] below-430:w-[20rem]  below-430:text-[0.8rem]  below-380:w-[15rem] below-380:text-[0.6rem]"
+          className={`absolute z-50 bg-white border border-gray-300 rounded-md shadow-lg mt-[10rem]  w-[40rem] border-t-0 max-h-60 overflow-y-auto ${ searchPage ? "top-[-3.5rem]" : "top-5"}  below-430:top-3 pt-5 below-1150:w-[30rem] below-430:w-[20rem]  below-430:text-[0.8rem]  below-380:w-[15rem] below-380:text-[0.6rem]`}
         >
           {suggestions.length > 0 ? (
             

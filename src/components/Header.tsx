@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Avatar from "./Avatar";
 import HeaderOptions from "./HeaderOptions";
 import SearchInput from "./searchInput";
-import { useAppSelector, useAppStore } from "@/lib/hook";
+import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hook";
 import { fetchWeatherDataByLocalityId } from "@/actions/getWeatherDataByLocalityID";
 import WeatherCard from "./weatherCard";
+import { setSearchValue } from "@/lib/features/product/SearchedValueSlice";
 // {
 //   "status": "200",
 //   "message": "",
@@ -54,6 +55,9 @@ function Header() {
   const [backgroundVideo, setBackgroundVideo] = useState("");
   const [dateTime, setDateTime] = useState(getFormattedDateTime());
 const[weatherConditionPicSource,setWeatherConditionPicSource]=useState(""); 
+const [searchTerm, setSearchTerm] = useState("");
+const dispatch = useAppDispatch();
+
   // console.log("this is the localityData", localityData);
   // console.log("this is the background video", backgroundVideo);
 
@@ -175,6 +179,12 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleClick = () => {
+    setSearchTerm("");
+    dispatch(setSearchValue("")); // Dispatch an action to update the Redux state
+    router.push("/");
+  }
+
   return (
     <header className="sticky top-0 bg-white">
       <div className="flex w-full p-6 items-center below-380:px-2">
@@ -184,7 +194,7 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
             src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
             width={120}
             height={40}
-            onClick={() => router.push("/")}
+            onClick={handleClick}
             className="cursor-pointer"
           />
         </div>
@@ -220,7 +230,7 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
         </div>
         </div>
         <div className="   flex items-center align-middle pl-[2rem] below-430:pl-0 ">
-          <SearchInput />
+          <SearchInput searchPage={true} />
         </div>
         </div>
         <div className="  w-[4rem] ml-5 mt-4  below-770:hidden">
@@ -262,7 +272,7 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
 
       </div>
 
-      <div className=" bottom min-h-[60vh]  flex  pt-12 gap-8 below-430:gap-1   p-4 flex-wrap  below-770:justify-around  ">
+      <div className=" bottom min-h-[60vh] below-430:min-h-[60vh]  flex  pt-12 gap-8 below-430:gap-1   p-4 flex-wrap  below-770:justify-around  ">
 {/* sfdghldkk */}
 
 {/* title,detail,source */}

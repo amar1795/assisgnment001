@@ -55,6 +55,6 @@ export const fetchWeatherStationsByLocality = cache(async ({ localityName, page 
         console.error("Error fetching weather stations by locality:", error);
         throw new Error("Failed to fetch weather stations by locality");
     } finally {
-        await prismadb.$disconnect(); // Disconnect Prisma client
+        // await prismadb.$disconnect(); // Disconnect Prisma client
     }
 });
