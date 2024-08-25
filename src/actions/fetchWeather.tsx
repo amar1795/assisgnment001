@@ -1,10 +1,10 @@
 "use server";
 
-import { PrismaClient } from '@prisma/client';
-// import { prismadb } from '@/lib/db';
+// import { PrismaClient } from '@prisma/client';
+import { prismadb } from '@/lib/db';
 import { cache } from 'react';
 
-const prismadb = new PrismaClient();
+// const prismadb = new PrismaClient();
 
 export const fetchAllWeatherStations = cache(async ({ page = 1, limit = 5, sortOrder = 'desc' }) => {
     const offset = (page - 1) * limit;  // Calculate offset
