@@ -54,13 +54,15 @@ To get started with the project locally, follow these steps:
    cd weather-application
 2. **Install Dependencies: Install the necessary dependencies using:**:
    ```bash
-  npm install
+    npm install
 
 3. **Set Up Environment Variables: Create a .env.local file in the root directory and add your environment variables. Example:**
+     ```bash
     MONGODB_URI=your_mongodb_uri
     NEXT_PUBLIC_API_URL=your_api_url
 
 4. **Run the Development Server: Start the development server with:**
+    ```bash
     npm run dev
 5. **View the Application: Open your browser and navigate to http://localhost:3000 to view the application.**
 
