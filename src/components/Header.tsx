@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hook";
 import { fetchWeatherDataByLocalityId } from "@/actions/getWeatherDataByLocalityID";
 import WeatherCard from "./weatherCard";
 import { setSearchValue } from "@/lib/features/product/SearchedValueSlice";
+import Spinner from "./loader/spinner";
 // {
 //   "status": "200",
 //   "message": "",
@@ -56,6 +57,8 @@ function Header() {
   const [dateTime, setDateTime] = useState(getFormattedDateTime());
 const[weatherConditionPicSource,setWeatherConditionPicSource]=useState(""); 
 const [searchTerm, setSearchTerm] = useState("");
+const [loading, setLoading] = useState(true);
+
 const dispatch = useAppDispatch();
 
   // console.log("this is the localityData", localityData);
@@ -114,6 +117,8 @@ const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true); // Start loading
+
       setSearchedPlaceName(SearchedValue);
 
       if (!searchedLocalityID) {
@@ -164,6 +169,7 @@ const dispatch = useAppDispatch();
         setWeatherConditionPicSource("../../../weather/cloudyPic.png")
 
       }
+      setLoading(false); // Stop loading when data is fully set
 
     };
     getData();
@@ -198,16 +204,7 @@ const dispatch = useAppDispatch();
             className="cursor-pointer"
           />
         </div>
-        {/* <form className="flex flex-grow px-6 py-3 ml-10 mr-5 border border-gray-200 rounded-full shadow-lg max-w-3xl items-center">
-          <input className="flex-grow w-full focus:outline-none" ref={searchInputRef} type="text" />
-          <XIcon 
-          className="h-7 sm:mr-3 text-gray-500 cursor-pointer transition duration-100 transform hover:scale-125"
-          onClick={() => searchInputRef.current.value=""}
-          />
-          <MicrophoneIcon className="mr-3 h-6 hidden sm:inline-flex text-blue-500 border-l-2 pl-4 border-gray-300 cursor-pointer"/>
-          <SearchIcon onClick={(event)=>{search(event)}} className="h-6 text-blue-500 hidden sm:inline-flex cursor-pointer"/>
-          <button hidden type="submit" onClick={(event)=>{search(event)}}/>
-        </form> */}
+       
         <div className=" below-770:flex below-770:flex-col    w-full">
 
         
@@ -241,8 +238,13 @@ const dispatch = useAppDispatch();
         </div>
       </div>
 
-      {/* Options */}
       <HeaderOptions />
+      {loading ? (
+        <div className=" flex items-center justify-center h-[50vh] w-full">
+          <Spinner/>
+        </div> // Your loading indicator
+      ) : (
+        <> {/* Options */}
       <div className=" relative   w-full text-white ">
       <video  key={backgroundVideo}  className="absolute top-0 left-0 w-full h-full object-cover -z-10"
     autoPlay
@@ -287,6 +289,8 @@ const dispatch = useAppDispatch();
       
        </div>
       </div>
+      </>
+      )}
     </header>
   );
 }
