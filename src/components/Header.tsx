@@ -262,7 +262,7 @@ const[weatherConditionPicSource,setWeatherConditionPicSource]=useState("");
 
       </div>
 
-      <div className=" bottom min-h-[80vh]  flex  pt-12 gap-8 p-4 flex-wrap  below-770:justify-around  ">
+      <div className=" bottom min-h-[80vh]  flex  pt-12 gap-8 below-430:gap-1   p-4 flex-wrap  below-770:justify-around  ">
 {/* sfdghldkk */}
 
 {/* <div className="bg-white/10 backdrop-blur-md h-[15rem] w-[20rem] rounded-[10%] flex shadow-lg border border-white/10">
